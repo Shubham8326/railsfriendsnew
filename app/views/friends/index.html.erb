@@ -1,0 +1,47 @@
+
+
+<%if user_signed_in? %>
+
+<h1>Friends</h1>
+
+<table class="table table-striped">
+  
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Twitter</th>
+      <th>Phone</th>
+      <th>user id</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @friends.each do |friend| %>
+      <%if friend.user == current_user %>
+      <tr>
+        <td>
+          <%= link_to friend.first_name + ' ' + friend.first_name, friend %></td>
+        <td><%= friend.email %></td>
+        <td><%= friend.twitter %></td>
+        <td><%= friend.phone %></td>
+        <td><%= friend.user_id %></td>
+          
+        
+
+        
+        <td><%= link_to 'Delete', friend, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %></td>
+
+      </tr>
+      <% end %>  
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Friend', new_friend_path, class:"btn btn-secondary" %>
+<%else%>
+<h1>Since you are not logged in, we can't show you anything</h1>
+<%end%>
